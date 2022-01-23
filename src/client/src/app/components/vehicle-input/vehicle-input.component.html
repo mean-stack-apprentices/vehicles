@@ -1,5 +1,6 @@
 <div>
     <h3>Add Vehicle Form</h3>
+    <h5>Note: All fields are mandatory</h5>
     <form [formGroup]='addVehicleForm'>
         <label for="year" >Year</label>
         <input type="number" formControlName="year">
@@ -10,7 +11,7 @@
         <label for="model">Model</label>
         <input type="text" formControlName="model">
         <br>
-        <button (click)=addVehicle()>Add Vehicle</button>
+        <button (click)=addVehicle() [disabled]="addVehicleForm.invalid">Add Vehicle</button>
     </form>
 </div>
 <br>

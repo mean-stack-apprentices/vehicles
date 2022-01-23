@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-vehicle-input',
@@ -10,7 +11,8 @@ export class VehicleInputComponent implements OnInit {
   addVehicleForm: FormGroup
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private vehicleService: VehicleService
   ) 
   { 
     this.addVehicleForm = fb.group({
@@ -25,7 +27,10 @@ export class VehicleInputComponent implements OnInit {
   }
 
   addVehicle() {
-    console.log(this.addVehicleForm.value);
+
+    this.vehicleService.addVehicle(this.addVehicleForm.value).subscribe(data => alert("Vehicle added successfully!"));
+
+    this.addVehicleForm.reset();
   }
 
 
