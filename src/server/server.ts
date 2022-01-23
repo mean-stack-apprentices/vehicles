@@ -37,6 +37,13 @@ app.post('/create-vehicle', function(req,res) {
     .save()
     .then(data => res.json(data))
     .catch(err => res.send(501).json(err))
+});
+
+app.get('/vehicles', function(req,res) {
+    VehicleModel
+    .find()
+    .then(data => res.json(data))
+    .catch(err => res.send(501).json(err));
 })
 
 app.get('/posts', function(req,res){
