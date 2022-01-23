@@ -15,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user/user.effects';
 import { PageUsersComponent } from './pages/page-users/page-users.component';
 import { VehicleInputComponent } from './components/vehicle-input/vehicle-input.component';
+import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VehicleInputComponent } from './components/vehicle-input/vehicle-input.
     UsersListComponent,
     UserInputComponent,
     PageUsersComponent,
-    VehicleInputComponent
+    VehicleInputComponent,
+    VehiclesListComponent
   ],
   imports: [
     BrowserModule,
