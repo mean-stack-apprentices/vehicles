@@ -1,0 +1,21 @@
+<div>
+    <h3>Add Vehicle Form</h3>
+    <form [formGroup]='addVehicleForm'>
+        <label for="year" >Year</label>
+        <input type="number" formControlName="year">
+        <br>
+        <label for="make">Make</label>
+        <input type="text" formControlName="make">
+        <br>
+        <label for="model">Model</label>
+        <input type="text" formControlName="model">
+        <br>
+        <button (click)=addVehicle()>Add Vehicle</button>
+    </form>
+</div>
+<br>
+<div>
+    <li>
+        {{addVehicleForm.value | json}}
+    </li>
+</div>
