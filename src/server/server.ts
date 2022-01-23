@@ -5,12 +5,13 @@ import path from 'path';
 import { PostModel } from './schemas/post.schema.js';
 import { UserModel } from './schemas/user.schema.js'
 import mongoose from 'mongoose';
+import { VehicleModel } from './schemas/vehicle.schema.js';
 
 const app = express();
 const __dirname = path.resolve();
 const PORT = 3501;
 
-mongoose.connect('mongodb://localhost:27017/test')
+mongoose.connect('mongodb://localhost:27017/vehiclesDB')
 .then(() => {
     console.log('Connected to DB Successfully');
 })
@@ -24,6 +25,19 @@ app.use(express.json());
 app.get('/', function(req, res) {
    res.json({message:'test'});
 });
+
+app.post('/create-vehicle', function(req,res) {
+    const {year,make,model} = req.body
+    const vehicle = new VehicleModel({
+        year,
+        make,
+        model
+    })
+    vehicle
+    .save()
+    .then(data => res.json(data))
+    .catch(err => res.send(501).json(err))
+})
 
 app.get('/posts', function(req,res){
     PostModel.find()
