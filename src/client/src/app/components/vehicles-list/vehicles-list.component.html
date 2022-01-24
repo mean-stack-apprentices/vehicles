@@ -1,2 +1,11 @@
-<p>vehicles-list works!</p>
+<h3>Vehicles list</h3>
+<div *ngIf="(vehicles$ | async) as vehicless">
+    <ol>
+        <li *ngFor="let vehicle of vehicless">
+            Year: {{vehicle.year}} <br>
+            Make: {{vehicle.make}} <br>
+            Model: {{vehicle.model}} <br><br>
+        </li>
+    </ol>
+</div>
 
