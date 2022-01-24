@@ -44,7 +44,15 @@ app.get('/vehicles', function(req,res) {
     .find()
     .then(data => res.json(data))
     .catch(err => res.send(501).json(err));
-})
+});
+
+app.get('/vehicle/:id', function(req,res) {
+    const id = req.params.id;
+    VehicleModel
+    .findById(id)
+    .then(data => res.json(data))
+    .catch(err => res.send(501).json(err));
+});
 
 app.get('/posts', function(req,res){
     PostModel.find()
