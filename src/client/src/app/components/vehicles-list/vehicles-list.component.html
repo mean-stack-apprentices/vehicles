@@ -1,11 +1,27 @@
+<hr>
+<h3>Search Vehicle by id:</h3>
+<form [formGroup]="searchForm">
+    <input type="text" placeholder="search vehicle by id" formControlName="id">
+    <button (click)="searchVehicle(searchForm.value)">Search</button>
+</form>
+<div>
+    <li *ngIf="vehicle">
+        Year: {{vehicle.year}} <br>
+        Make: {{vehicle.make}} <br>
+        Model: {{vehicle.model}} <br>
+    </li>
+</div>
+<hr>
+
 <h3>Vehicles list</h3>
 <div *ngIf="(vehicles$ | async) as vehicless">
     <ol>
-        <li *ngFor="let vehicle of vehicless">
-            Year: {{vehicle.year}} <br>
-            Make: {{vehicle.make}} <br>
-            Model: {{vehicle.model}} <br><br>
+        <li *ngFor="let vehcl of vehicless">
+            Year: {{vehcl.year}} <br>
+            Make: {{vehcl.make}} <br>
+            Model: {{vehcl.model}} <br><br>
         </li>
     </ol>
 </div>
+
 
