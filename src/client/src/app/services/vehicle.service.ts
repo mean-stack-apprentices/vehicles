@@ -16,5 +16,9 @@ export class VehicleService {
       return this.api.post<Vehicle, Vehicle>('create-vehicle', vehicle);
   }
 
+  getVehicles() {
+    return this.api.get<Vehicle[]>('vehicles');
+  }
+
 
 }
