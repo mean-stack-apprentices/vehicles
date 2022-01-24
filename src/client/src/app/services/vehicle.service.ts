@@ -20,5 +20,9 @@ export class VehicleService {
     return this.api.get<Vehicle[]>('vehicles');
   }
 
+  getVehicle(id: string) {
+    return this.api.get<Vehicle>('vehicle/'+id);
+  }
+
 
 }
