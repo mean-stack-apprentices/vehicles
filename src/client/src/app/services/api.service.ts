@@ -21,7 +21,7 @@ export class ApiService {
     return this.http.delete<T>(this.baseUrl + resourceName);
   }
 
-  put<T>(resourceName: string, data: any) {
+  put<T,D>(resourceName: string, data: D) {
     return this.http.put<T>(this.baseUrl + resourceName, data);
   }
 }
