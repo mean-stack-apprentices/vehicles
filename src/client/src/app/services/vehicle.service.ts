@@ -24,5 +24,9 @@ export class VehicleService {
     return this.api.get<Vehicle>('vehicle/'+id);
   }
 
+  updateVehicle(id: string, vehicle: Vehicle) {
+    return this.api.put<Vehicle, Vehicle>('vehicle/'+id, vehicle);
+  }
+
 
 }
