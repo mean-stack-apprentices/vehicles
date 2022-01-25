@@ -54,6 +54,25 @@ app.get('/vehicle/:id', function(req,res) {
     .catch(err => res.send(501).json(err));
 });
 
+app.put('/vehicle/:id', function(req,res) {
+    const vehicle = req.body;
+    const id = req.params.id;
+
+    VehicleModel
+    .findByIdAndUpdate(
+        id,
+        vehicle,
+        {
+            new: true
+        }
+    )
+    .then(data => {
+        console.log("updated data: " + data);
+        res.json(data)
+    })
+    .catch(err => res.status(501).json(err))
+});
+
 app.get('/posts', function(req,res){
     PostModel.find()
     .then(data => res.json({data}))
