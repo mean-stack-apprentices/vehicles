@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { Vehicle } from '../../../../../shared/models/vehicle.model';
 
@@ -10,10 +11,11 @@ import { Vehicle } from '../../../../../shared/models/vehicle.model';
   templateUrl: './vehicles-list.component.html',
   styleUrls: ['./vehicles-list.component.scss']
 })
-export class VehiclesListComponent implements OnInit {
+export class VehiclesListComponent implements OnInit, OnDestroy {
   vehicles$: Observable<Vehicle[]>;
   searchForm: FormGroup;
   vehicle: Vehicle | null = null;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private vehicleService: VehicleService,
@@ -30,8 +32,18 @@ export class VehiclesListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchVehicle(value: any) {
-    return this.vehicleService.getVehicle(value.id).subscribe(data => this.vehicle = data);
+  ngOnDestroy(): void {
+      this.subscriptions.forEach(sub => sub.unsubscribe());
   }
+
+  searchVehicle(value: any) {
+    this.vehicle = null;
+    this.subscriptions.push(
+      this.vehicleService.getVehicle(value.id).subscribe(data => this.vehicle = data)
+    )
+    
+    this.searchForm.reset();
+  }
+
 
 }
