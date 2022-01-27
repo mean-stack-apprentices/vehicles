@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
@@ -7,8 +8,9 @@ import { VehicleService } from 'src/app/services/vehicle.service';
   templateUrl: './vehicle-input.component.html',
   styleUrls: ['./vehicle-input.component.scss']
 })
-export class VehicleInputComponent implements OnInit {
-  addVehicleForm: FormGroup
+export class VehicleInputComponent implements OnInit, OnDestroy {
+  addVehicleForm: FormGroup;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -26,9 +28,15 @@ export class VehicleInputComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+      this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   addVehicle() {
 
-    this.vehicleService.addVehicle(this.addVehicleForm.value).subscribe(data => alert("Vehicle added successfully!"));
+    this.subscriptions.push (
+      this.vehicleService.addVehicle(this.addVehicleForm.value).subscribe(data => alert("Vehicle added successfully!"))
+    )
 
     this.addVehicleForm.reset();
   }
