@@ -14,9 +14,11 @@
 <hr>
 
 <h3>Vehicles list</h3>
-<div *ngIf="(vehicles$ | async) as vehicless">
+
+<div  *ngIf="(vehicles$ | async) as vehicless">
     <ol>
         <li *ngFor="let vehcl of vehicless">
+            Id: {{vehcl._id}} <br>
             Year: {{vehcl.year}} <br>
             Make: {{vehcl.make}} <br>
             Model: {{vehcl.model}} <br><br>
