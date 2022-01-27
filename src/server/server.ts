@@ -73,6 +73,15 @@ app.put('/vehicle/:id', function(req,res) {
     .catch(err => res.status(501).json(err))
 });
 
+app.delete('/delete-vehicle/:id', function(req,res) {
+    const id = req.params.id;
+    console.log(id);
+    VehicleModel
+    .findByIdAndDelete(id)
+    .then(data => res.json(data))
+    .catch(err => res.json(err))
+});
+
 app.get('/posts', function(req,res){
     PostModel.find()
     .then(data => res.json({data}))
