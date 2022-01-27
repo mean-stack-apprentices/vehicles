@@ -13,17 +13,24 @@
 </div>
 <hr>
 
+
+
+
 <h3>Vehicles list</h3>
 
 <div  *ngIf="(vehicles$ | async) as vehicless">
     <ol>
-        <li *ngFor="let vehcl of vehicless">
-            Id: {{vehcl._id}} <br>
-            Year: {{vehcl.year}} <br>
-            Make: {{vehcl.make}} <br>
-            Model: {{vehcl.model}} <br><br>
+        <li *ngFor="let vehicle1 of vehicless">
+            Id: {{vehicle1._id}} <br>
+            Year: {{vehicle1.year}} <br>
+            Make: {{vehicle1.make}} <br>
+            Model: {{vehicle1.model}} <br><br>
+            <button (click) = "deleteVehicle(vehicle1)">Delete</button>
+            <button (click) = "selectVehicle(vehicle1)">Select and Update</button>
         </li>
     </ol>
 </div>
+<app-edit-vehicle [selectedVehicle]="vehicle1" ></app-edit-vehicle>
+
 
 

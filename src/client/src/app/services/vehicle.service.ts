@@ -28,5 +28,10 @@ export class VehicleService {
     return this.api.put<Vehicle, Vehicle>('vehicle/'+id, vehicle);
   }
 
+  deleteVehicle(id: string) {
+    console.log(id);
+    return this.api.delete<Vehicle>('delete-vehicle'+id);
+  }
+
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -15,6 +15,8 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
   vehicles$: Observable<Vehicle[]>;
   searchForm: FormGroup;
   vehicle: Vehicle | null = null;
+  @Input() public vehicle1: Vehicle | null = null;
+
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -43,6 +45,15 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
     )
     
     this.searchForm.reset();
+  }
+
+  selectVehicle(vehicle: Vehicle) {
+
+  }
+
+  deleteVehicle(vehicle: any) {
+    console.log(vehicle._id)
+    this.vehicleService.deleteVehicle(vehicle._id);
   }
 
 
