@@ -11,6 +11,8 @@ import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.
 import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromVehicle from './store/reducers/vehicle/vehicle.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { VehicleEffects } from './store/effects/vehicle/vehicle.effects';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import * as fromVehicle from './store/reducers/vehicle/vehicle.reducer';
     ReactiveFormsModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forFeature(fromVehicle.vehicleFeatureKey, fromVehicle.reducer),
+    EffectsModule.forRoot([VehicleEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
