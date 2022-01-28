@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { createVehicle, createVehicleFailure, createVehicleSuccess, loadVehicles, loadVehiclesFailure, loadVehiclesSuccess } from '../../actions/vehicle/vehicle.actions';
+import { createVehicle, createVehicleFailure, createVehicleSuccess, deleteVehicle, deleteVehicleFailure, deleteVehicleSuccess, loadVehicles, loadVehiclesFailure, loadVehiclesSuccess } from '../../actions/vehicle/vehicle.actions';
 
 
 
@@ -28,6 +28,18 @@ export class VehicleEffects {
         this.vehicleService.addVehicle(action.data).pipe(
           map((data) => createVehicleSuccess({data})),
           catchError((error) => of(createVehicleFailure({ error })))
+        )
+      )
+    )
+  );
+
+  deleteVehicle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteVehicle),
+      mergeMap((action) =>
+        this.vehicleService.deleteVehicle(action.data).pipe(
+          map((data) => deleteVehicleSuccess({data})),
+          catchError((error) => of(deleteVehicleFailure({ error })))
         )
       )
     )
