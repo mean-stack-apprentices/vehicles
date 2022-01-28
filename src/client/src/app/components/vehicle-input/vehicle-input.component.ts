@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { AppState } from 'src/app/store';
+import { createVehicle } from 'src/app/store/actions/vehicle/vehicle.actions';
 import { Vehicle } from '../../../../../shared/models/vehicle.model';
 
 @Component({
@@ -16,7 +19,8 @@ export class VehicleInputComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private vehicleService: VehicleService
+    private vehicleService: VehicleService,
+    private store: Store<AppState>
   ) 
   { 
     this.addVehicleForm = fb.group({
@@ -35,10 +39,8 @@ export class VehicleInputComponent implements OnInit, OnDestroy {
   }
 
   addVehicle() {
-
-    this.subscriptions.push (
-      this.vehicleService.addVehicle(this.addVehicleForm.value).subscribe(data => alert("Vehicle added successfully!"))
-    )
+    this.store.dispatch(createVehicle({data: this.addVehicleForm.value}));  
+      
     this.addVehicleForm.reset();
   }
 
