@@ -77,9 +77,7 @@ app.put('/update-vehicle/:id', function(req,res) {
 });
 
 app.delete('/delete-vehicle/:id', function(req,res) {
-    console.log("delllll")
     const id = req.params.id;
-    console.log("delete ",id);
     VehicleModel
     .findByIdAndDelete(id)
     .then(data => res.json(data))
