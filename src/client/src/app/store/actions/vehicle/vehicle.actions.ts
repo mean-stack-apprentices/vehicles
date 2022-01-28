@@ -35,4 +35,21 @@ export const createVehicleFailure = createAction(
   props<{ error: Error }>()
 );
 
+export const deleteVehicle = createAction(
+  '[Vehicle] Delete Vehicle',
+  props<{ data: Vehicle }>()
+);
+
+export const deleteVehicleSuccess = createAction(
+  '[Vehicle] Delete Vehicle Success',
+  props<{ data: Vehicle }>()
+);
+
+export const deleteVehicleFailure = createAction(
+  '[Vehicle] Delete Vehicle Failure',
+  props<{ error: Error }>()
+);
+
+
+
 
