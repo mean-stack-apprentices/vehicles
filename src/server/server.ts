@@ -33,15 +33,19 @@ app.post('/create-vehicle', function(req,res) {
     })
     vehicle
     .save()
-    .then(data => res.json(data))
-    .catch(err => res.sendStatus(501).json(err))
+    .then(data => {
+        console.log('vehicle created');
+        res.json(data)})
+    .catch(err => {
+        console.log('vehicle error');
+        res.status(501).json(err)})
 });
 
 app.get('/vehicles', function(req,res) {
     VehicleModel
     .find()
     .then(data => res.json(data))
-    .catch(err => res.sendStatus(501).json(err));
+    .catch(err => res.status(501).json(err));
 });
 
 app.get('/vehicle/:id', function(req,res) {
@@ -49,7 +53,7 @@ app.get('/vehicle/:id', function(req,res) {
     VehicleModel
     .findById(id)
     .then(data => res.json(data))
-    .catch(err => res.sendStatus(501).json(err));
+    .catch(err => res.status(501).json(err));
 });
 
 app.put('/update-vehicle/:id', function(req,res) {
@@ -69,7 +73,7 @@ app.put('/update-vehicle/:id', function(req,res) {
         console.log("updated data: " + data);
         res.json(data);
     })
-    .catch(err => res.sendStatus(501).json(err))
+    .catch(err => res.status(501).json(err))
 });
 
 app.delete('/delete-vehicle/:id', function(req,res) {
@@ -79,7 +83,7 @@ app.delete('/delete-vehicle/:id', function(req,res) {
     VehicleModel
     .findByIdAndDelete(id)
     .then(data => res.json(data))
-    .catch(err => res.sendStatus(501).json(err))
+    .catch(err => res.status(501).json(err))
 });
 
 
