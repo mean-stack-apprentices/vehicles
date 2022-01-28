@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { createVehicle, createVehicleFailure, createVehicleSuccess, deleteVehicle, deleteVehicleFailure, deleteVehicleSuccess, loadVehicles, loadVehiclesFailure, loadVehiclesSuccess } from '../../actions/vehicle/vehicle.actions';
+import { createVehicle, createVehicleFailure, createVehicleSuccess, deleteVehicle, deleteVehicleFailure, deleteVehicleSuccess, loadVehicles, loadVehiclesFailure, loadVehiclesSuccess, navigateOnUpdateVehicleSuccess, updateVehicle, updateVehicleFailure, updateVehicleSuccess } from '../../actions/vehicle/vehicle.actions';
 
 
 
@@ -44,6 +44,28 @@ export class VehicleEffects {
       )
     )
   );
+
+  updateVehicle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateVehicle),
+      mergeMap((action) =>
+        this.vehicleService.updateVehicle(action.data, action.id).pipe(
+          map((data) => updateVehicleSuccess({data})),
+          catchError((error) => of(updateVehicleFailure({ error })))
+        )
+      )
+    )
+  );
+
+  navigateOnUpdateVehicle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateVehicleSuccess),
+      mergeMap(() => 
+      this.vehicleService.navigateOnUpdateVehicle().pipe(
+        map(() => navigateOnUpdateVehicleSuccess())
+      ))
+    )
+  ); 
 
   constructor(private actions$: Actions,
     private vehicleService: VehicleService
