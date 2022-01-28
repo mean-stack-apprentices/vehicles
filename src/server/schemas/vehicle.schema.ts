@@ -5,7 +5,6 @@ import { Vehicle } from '../../shared/models/vehicle.model.js';
 const {model, Schema} = mongoose;
 
 const vehicleSchema = new Schema<Vehicle>({
-    _id: {type: mongoose.Types.ObjectId},
     year: {type: Number, required: true},
     make: {type: String, required: true},
     model: {type: String, required: true}
