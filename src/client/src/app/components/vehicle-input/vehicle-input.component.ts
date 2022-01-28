@@ -1,18 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { AppState } from 'src/app/store';
 import { createVehicle } from 'src/app/store/actions/vehicle/vehicle.actions';
-import { Vehicle } from '../../../../../shared/models/vehicle.model';
 
 @Component({
   selector: 'app-vehicle-input',
   templateUrl: './vehicle-input.component.html',
   styleUrls: ['./vehicle-input.component.scss']
 })
-export class VehicleInputComponent implements OnInit, OnDestroy {
+export class VehicleInputComponent implements OnInit {
   addVehicleForm: FormGroup;
   subscriptions: Subscription[] = [];
   
@@ -34,13 +33,9 @@ export class VehicleInputComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  ngOnDestroy(): void {
-      this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
   addVehicle() {
     this.store.dispatch(createVehicle({data: this.addVehicleForm.value}));  
-      
+
     this.addVehicleForm.reset();
   }
 
