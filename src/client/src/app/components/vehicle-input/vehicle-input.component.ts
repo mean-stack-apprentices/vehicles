@@ -37,13 +37,17 @@ export class VehicleInputComponent implements OnInit, OnDestroy {
   addVehicle() {
 
     this.subscriptions.push (
-      
+      this.vehicleService.addVehicle(this.addVehicleForm.value).subscribe(data => alert("Vehicle added successfully!"))
     )
-
-    this.vehicleService.addVehicle(this.addVehicleForm.value).subscribe(data => alert("Vehicle added successfully!"))
-
     this.addVehicleForm.reset();
   }
 
+  get years() {
+    const years = [];
+    for(let i = 1990; i<=2050; i++) {
+      years.push(i);
+    }
+    return years;
+  }
 
 }
