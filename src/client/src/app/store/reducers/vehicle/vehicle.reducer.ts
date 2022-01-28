@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Vehicle } from '../../../../../../shared/models/vehicle.model';
-import { createVehicleSuccess, deleteVehicleSuccess, loadVehiclesSuccess, selectVehicle } from '../../actions/vehicle/vehicle.actions';
+import { createVehicleSuccess, deleteVehicleSuccess, loadVehiclesSuccess, selectVehicle, updateVehicleSuccess } from '../../actions/vehicle/vehicle.actions';
 
 
 export const vehicleFeatureKey = 'vehicle';
@@ -34,6 +34,10 @@ export const reducer = createReducer(
     const vehicles = state.vehicles.filter(vehicle => vehicle._id !== action.data._id);
     alert("Vehicle deleted Successfully");
     return {...state, vehicles};
+  }),
+  on(updateVehicleSuccess, (state, action) => {
+    alert("Vehicle updated Successfully");
+    return {...state};
   }),
 );
 
