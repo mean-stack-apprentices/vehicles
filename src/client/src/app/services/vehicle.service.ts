@@ -24,12 +24,13 @@ export class VehicleService {
     return this.api.get<Vehicle>('vehicle/'+id);
   }
 
-  updateVehicle(id: string, vehicle: Vehicle) {
-    return this.api.put<Vehicle, Vehicle>('vehicle/'+id, vehicle);
+  updateVehicle(id: string | undefined, vehicle: Vehicle) {
+    console.log('upbdn...',id,'veghhh: ', vehicle);
+    return this.api.put<Vehicle, Vehicle>('update-vehicle/'+id, vehicle);
   }
 
-  deleteVehicle(id: string) {
-    return this.api.delete<Vehicle>('delete-vehicle/'+id);
+  deleteVehicle(vehicle: Vehicle) {
+    return this.api.delete<Vehicle>('delete-vehicle/'+vehicle._id);
   }
 
 
