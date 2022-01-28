@@ -9,4 +9,11 @@ export const vehicleSelector = createSelector(
   (state) => state.selectedVehicle
 );
 
+export const vehiclesSelector = createSelector(
+  vehicleFeatureSelector,
+  (state) => state.vehicles
+);
+
+
+
 
