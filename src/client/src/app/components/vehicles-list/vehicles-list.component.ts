@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { AppState } from 'src/app/store';
 import { selectVehicle } from 'src/app/store/actions/vehicle/vehicle.actions';
+import { vehiclesSelector } from 'src/app/store/selectors/vehicle/vehicle.selectors';
 import { Vehicle } from '../../../../../shared/models/vehicle.model';
 
 
@@ -21,10 +24,11 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
   constructor(
     private vehicleService: VehicleService,
     private fb: FormBuilder,
-    private store: Store,
+    private store: Store<AppState>,
+    private router: Router
   ) 
   { 
-    this.vehicles$ = this.vehicleService.getVehicles();
+    this.vehicles$ = this.store.select(vehiclesSelector);
 
     this.searchForm = this.fb.group({
       id: ['']
@@ -48,7 +52,9 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
   }
 
   selectVehicle(vehicle: Vehicle) {
-    this.store.dispatch(selectVehicle({data: vehicle}))
+    this.store.dispatch(selectVehicle({data: vehicle}));
+
+    this.router.navigate(['edit-vehicle']);
   }
 
   deleteVehicle(vehicle: any) {
