@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { loadVehicles, loadVehiclesFailure, loadVehiclesSuccess } from '../../actions/vehicle/vehicle.actions';
+import { createVehicle, createVehicleFailure, createVehicleSuccess, loadVehicles, loadVehiclesFailure, loadVehiclesSuccess } from '../../actions/vehicle/vehicle.actions';
 
 
 
@@ -21,6 +21,17 @@ export class VehicleEffects {
     )
   );
 
+  createVehicle$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(createVehicle),
+      mergeMap((action) =>
+        this.vehicleService.addVehicle(action.data).pipe(
+          map((data) => createVehicleSuccess({data})),
+          catchError((error) => of(createVehicleFailure({ error })))
+        )
+      )
+    )
+  );
 
   constructor(private actions$: Actions,
     private vehicleService: VehicleService
