@@ -1,0 +1,17 @@
+
+<div class="form-div">
+    <h3>Update Vehicle Form</h3>
+    <form [formGroup]='editVehicleForm'>
+        <label for="year" >Year</label>
+        <input type="text" formControlName="year">
+        <br>
+        <label for="make">Make</label>
+        <input type="text" formControlName="make">
+        <br>
+        <label for="model">Model</label>
+        <input type="text" formControlName="model">
+        <br>
+        <button (click)="editVehicle()" [disabled]="editVehicleForm.invalid">Update Vehicle</button>
+    </form>
+</div>
+<br>
