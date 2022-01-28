@@ -1,6 +1,6 @@
-<div>
+<div class="form-div">
     <h3>Add Vehicle Form</h3>
-    <h5>Note: All fields are mandatory</h5>
+    <p>Note: All fields are mandatory</p>
     <form [formGroup]='addVehicleForm'>
         <label for="year" >Year</label>
         <select formControlName="year">
@@ -17,10 +17,5 @@
     </form>
 </div>
 <br>
-<div>
-    <li>
-        {{addVehicleForm.value | json}}
-    </li>
-</div>
 
 <app-vehicles-list></app-vehicles-list>
