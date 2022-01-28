@@ -7,12 +7,12 @@ export const loadVehicles = createAction(
 
 export const loadVehiclesSuccess = createAction(
   '[Vehicle] Load Vehicles Success',
-  props<{ data: any }>()
+  props<{ data: Vehicle[] }>()
 );
 
 export const loadVehiclesFailure = createAction(
   '[Vehicle] Load Vehicles Failure',
-  props<{ error: any }>()
+  props<{ error: Error }>()
 );
 
 export const selectVehicle = createAction(
