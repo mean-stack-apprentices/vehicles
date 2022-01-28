@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { AppState } from 'src/app/store';
-import { selectVehicle } from 'src/app/store/actions/vehicle/vehicle.actions';
+import { loadVehicles, selectVehicle } from 'src/app/store/actions/vehicle/vehicle.actions';
 import { vehiclesSelector } from 'src/app/store/selectors/vehicle/vehicle.selectors';
 import { Vehicle } from '../../../../../shared/models/vehicle.model';
 
@@ -36,6 +36,7 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(loadVehicles());
   }
 
   ngOnDestroy(): void {
