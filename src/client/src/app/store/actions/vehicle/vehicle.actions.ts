@@ -50,6 +50,28 @@ export const deleteVehicleFailure = createAction(
   props<{ error: Error }>()
 );
 
+export const updateVehicle = createAction(
+  '[Vehicle] Update Vehicle',
+  props<{ data: Vehicle, id: string | undefined }>()
+);
+
+export const updateVehicleSuccess = createAction(
+  '[Vehicle] Update Vehicle Success',
+  props<{ data: Vehicle }>()
+);
+
+export const updateVehicleFailure = createAction(
+  '[Vehicle] Update Vehicle Failure',
+  props<{ error: Error }>()
+);
+
+export const navigateOnUpdateVehicleSuccess = createAction(
+  '[Vehicle] Navigate On UpdateVehicle Success',
+  
+);
+
+
+
 
 
 
