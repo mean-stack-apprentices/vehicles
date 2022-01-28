@@ -9,6 +9,8 @@ import { environment } from '../environments/environment';
 import { VehicleInputComponent } from './components/vehicle-input/vehicle-input.component';
 import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
 import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromVehicle from './store/reducers/vehicle/vehicle.reducer';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.com
     FormsModule,
     ReactiveFormsModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreModule.forFeature(fromVehicle.vehicleFeatureKey, fromVehicle.reducer),
   ],
   providers: [],
   bootstrap: [AppComponent]
