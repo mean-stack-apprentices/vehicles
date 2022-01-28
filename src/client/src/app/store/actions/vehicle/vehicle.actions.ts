@@ -20,4 +20,19 @@ export const selectVehicle = createAction(
   props<{ data: Vehicle }>()
 );
 
+export const createVehicle = createAction(
+  '[Vehicle] Create Vehicle',
+  props<{ data: Vehicle }>()
+);
+
+export const createVehicleSuccess = createAction(
+  '[Vehicle] Create Vehicle Success',
+  props<{ data: Vehicle }>()
+);
+
+export const createVehicleFailure = createAction(
+  '[Vehicle] Create Vehicle Failure',
+  props<{ error: Error }>()
+);
+
 
