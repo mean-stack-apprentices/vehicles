@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import {Vehicle} from '../../../../shared/models/vehicle.model.js';
+import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,8 @@ import {Vehicle} from '../../../../shared/models/vehicle.model.js';
 export class VehicleService {
 
   constructor( 
-    private api: ApiService
+    private api: ApiService,
+    private router: Router
   ) 
   { }
 
@@ -24,14 +27,16 @@ export class VehicleService {
     return this.api.get<Vehicle>('vehicle/'+id);
   }
 
-  updateVehicle(id: string | undefined, vehicle: Vehicle) {
-    console.log('upbdn...',id,'veghhh: ', vehicle);
-    return this.api.put<Vehicle, Vehicle>('update-vehicle/'+id, vehicle);
+  updateVehicle(vehicle: Vehicle, id: string | undefined) {
+    return this.api.put<Vehicle, Vehicle>('update-vehicle/'+ id, vehicle);
   }
 
   deleteVehicle(vehicle: Vehicle) {
     return this.api.delete<Vehicle>('delete-vehicle/'+vehicle._id);
   }
 
+  navigateOnUpdateVehicle() {
+    return of(this.router.navigate(['/']));
+  }
 
 }
