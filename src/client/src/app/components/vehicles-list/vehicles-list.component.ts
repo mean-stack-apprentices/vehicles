@@ -1,8 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { selectVehicle } from 'src/app/store/actions/vehicle/vehicle.actions';
 import { Vehicle } from '../../../../../shared/models/vehicle.model';
 
 
@@ -15,13 +16,12 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
   vehicles$: Observable<Vehicle[]>;
   searchForm: FormGroup;
   vehicle: Vehicle | null = null;
-  @Input() public vehicle1: Vehicle | null = null;
-
   subscriptions: Subscription[] = [];
 
   constructor(
     private vehicleService: VehicleService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store,
   ) 
   { 
     this.vehicles$ = this.vehicleService.getVehicles();
@@ -48,12 +48,14 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
   }
 
   selectVehicle(vehicle: Vehicle) {
-
+    this.store.dispatch(selectVehicle({data: vehicle}))
   }
 
   deleteVehicle(vehicle: any) {
-    console.log(vehicle._id)
-    this.vehicleService.deleteVehicle(vehicle._id);
+    
+    this.subscriptions.push(
+      this.vehicleService.deleteVehicle(vehicle._id).subscribe()
+    )
   }
 
 
