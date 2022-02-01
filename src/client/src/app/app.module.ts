@@ -14,7 +14,6 @@ import * as fromVehicle from './store/reducers/vehicle/vehicle.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { VehicleEffects } from './store/effects/vehicle/vehicle.effects';
 import { metaReducers, reducers } from './store';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FlexLayoutModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
