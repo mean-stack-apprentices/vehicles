@@ -3,8 +3,15 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
+import multer from 'multer';
 import { VehicleModel } from './schemas/vehicle.schema.js';
 
+<<<<<<< Updated upstream
+=======
+// to include 'multer' module in server.js that exist in separate file.
+// const multer = require('multer');
+
+>>>>>>> Stashed changes
 const app = express();
 const __dirname = path.resolve();
 const PORT = 3501;
@@ -24,12 +31,33 @@ app.get('/', function(req, res) {
    res.json({message:'test'});
 });
 
-app.post('/create-vehicle', function(req,res) {
+// define a storage location for all files
+//Create a folder- images, in the root directory.
+const imageStorage = multer.diskStorage({
+    destination: 'images',
+    filename: (req, file, cb) => {
+        const fileName = file.fieldname+'_'+ Date.now() + path.extname(file.originalname)
+        cb(null, fileName)
+    }
+})
+
+const imageUpload = multer({
+    storage: imageStorage,
+})
+
+app.post('/upload', imageUpload.single('file'), function(req,res) {
+    res.json({file: req.file});
+})
+
+app.post('/create-vehicle', imageUpload.single("file") ,function(req,res) {
     const {year,make,model} = req.body
+    const imgUrl = req.file?.path
+    console.log(imgUrl);
     const vehicle = new VehicleModel({
         year,
         make,
-        model
+        model,
+        imgUrl
     })
     vehicle
     .save()
