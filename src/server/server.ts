@@ -6,12 +6,9 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import { VehicleModel } from './schemas/vehicle.schema.js';
 
-<<<<<<< Updated upstream
-=======
 // to include 'multer' module in server.js that exist in separate file.
 // const multer = require('multer');
 
->>>>>>> Stashed changes
 const app = express();
 const __dirname = path.resolve();
 const PORT = 3501;
