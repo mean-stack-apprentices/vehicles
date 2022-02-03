@@ -5,6 +5,9 @@ import path from 'path';
 import mongoose from 'mongoose';
 import { VehicleModel } from './schemas/vehicle.schema.js';
 
+// to include 'multer' module in server.js that exist in separate file.
+const multer = require('multer');
+
 const app = express();
 const __dirname = path.resolve();
 const PORT = 3501;
@@ -14,8 +17,6 @@ mongoose.connect('mongodb://localhost:27017/vehiclesDB')
     console.log('Connected to DB Successfully');
 })
 .catch(err => console.log('Failed to Connect to DB', err))
-
-
 
 app.use(cors());
 app.use(express.json());
